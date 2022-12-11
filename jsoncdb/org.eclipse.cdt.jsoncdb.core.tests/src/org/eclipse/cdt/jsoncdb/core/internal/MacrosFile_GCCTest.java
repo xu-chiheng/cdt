@@ -82,7 +82,7 @@ public class MacrosFile_GCCTest {
 		parsed = result.getMacroFiles().get(0);
 		assertEquals("name", name, parsed);
 
-		name = (new Path("A:an\\Macros/file.inc")).toOSString();
+		name = (new Path("A:an\\Macros/file.inc")).toString();
 		// -imacrosA:an\Macros/file.inc
 		result = new ParseContext();
 		assertEquals(8 + name.length(), testee.processArgument(result, cwd, "-imacros" + name + more));
@@ -131,7 +131,7 @@ public class MacrosFile_GCCTest {
 		parsed = result.getMacroFiles().get(0);
 		assertEquals("name", name, parsed);
 
-		name = (new Path("A:an\\Ma cr os/fi le.inc")).toOSString();
+		name = (new Path("A:an\\Ma cr os/fi le.inc")).toString();
 		// -imacros'A:an\Ma cr os/fi le.inc'
 		result = new ParseContext();
 		assertEquals(8 + name.length() + 2,

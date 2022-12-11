@@ -45,7 +45,7 @@ public class BasicIncludeBrowserTest extends IncludeBrowserBaseTest {
 	// #include "user.h"
 
 	public void testSimpleInclusion() throws Exception {
-		TestScannerProvider.sIncludes = new String[] { getProject().getProject().getLocation().toOSString() };
+		TestScannerProvider.sIncludes = new String[] { getProject().getProject().getLocation().toString() };
 
 		StringBuilder[] contents = getContentsForTest(1);
 		IProject project = getProject().getProject();
@@ -80,7 +80,7 @@ public class BasicIncludeBrowserTest extends IncludeBrowserBaseTest {
 		try {
 			fIndex = CCorePlugin.getIndexManager().getIndex(new ICProject[] { getProject(), op });
 
-			TestScannerProvider.sIncludes = new String[] { op.getProject().getLocation().toOSString() };
+			TestScannerProvider.sIncludes = new String[] { op.getProject().getLocation().toString() };
 
 			StringBuilder[] contents = getContentsForTest(1);
 			IFile user = createFile(op.getProject(), "user.h", "");

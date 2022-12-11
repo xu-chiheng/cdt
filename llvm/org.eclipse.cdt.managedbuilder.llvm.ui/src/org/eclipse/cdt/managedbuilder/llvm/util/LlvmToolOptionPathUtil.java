@@ -171,7 +171,7 @@ public class LlvmToolOptionPathUtil {
 			IConfiguration[] configs;
 			String projectPath = null;
 			for (IProject proj : projects) {
-				projectPath = proj.getLocation().toOSString();
+				projectPath = proj.getLocation().toString();
 				if (projectPath != null) {
 					//only apply to C++ projects
 					if (FileUtil.containsCppFile(new File(projectPath))) {

@@ -154,7 +154,7 @@ public class ProcessSettingsPage extends AbstractSettingsPage {
 			Bundle bundle = Platform.getBundle("org.eclipse.core.resources"); //$NON-NLS-1$
 			if (bundle != null && bundle.getState() != Bundle.UNINSTALLED && bundle.getState() != Bundle.STOPPING) {
 				dialog.setFilterPath(
-						org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString());
+						org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot().getLocation().toString());
 			}
 		}
 

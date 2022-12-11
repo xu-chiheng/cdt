@@ -110,8 +110,7 @@ public abstract class SearchTestBase extends BaseUITestCase {
 			CCorePlugin.getIndexManager().reindex(fReferencedCProject);
 			waitForIndexer(fReferencedCProject);
 
-			TestScannerProvider.sIncludes = new String[] {
-					fReferencedCProject.getProject().getLocation().toOSString() };
+			TestScannerProvider.sIncludes = new String[] { fReferencedCProject.getProject().getLocation().toString() };
 
 			fSourceContents = fTestData[1].toString();
 			fSourceFile = TestSourceReader.createFile(fCProject.getProject(), new Path("refs.cpp"), fSourceContents);

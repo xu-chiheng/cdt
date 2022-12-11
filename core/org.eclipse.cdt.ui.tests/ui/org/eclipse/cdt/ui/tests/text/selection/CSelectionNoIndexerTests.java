@@ -121,7 +121,7 @@ public class CSelectionNoIndexerTests extends BaseSelectionTests {
 
 		IPath location = ResourceHelper.createTemporaryFolder().append(fileName);
 
-		File linkFile = new File(location.toOSString());
+		File linkFile = new File(location.toString());
 		assertFalse(linkFile.exists());
 		linkFile.createNewFile();
 
@@ -142,7 +142,7 @@ public class CSelectionNoIndexerTests extends BaseSelectionTests {
 	protected IFile importFileInsideLinkedFolder(String fileName, String contents, String folderName) throws Exception {
 		IFolder linkedFolder = project.getFolder(folderName);
 		IPath folderLocation = new Path(
-				project.getLocation().toOSString() + File.separator + folderName + "_this_is_linked"); //$NON-NLS-1$
+				project.getLocation().toString() + File.separator + folderName + "_this_is_linked"); //$NON-NLS-1$
 		IFolder actualFolder = project.getFolder(folderName + "_this_is_linked"); //$NON-NLS-1$
 		if (!actualFolder.exists())
 			actualFolder.create(true, true, monitor);
@@ -172,9 +172,9 @@ public class CSelectionNoIndexerTests extends BaseSelectionTests {
 		//Obtain file handle
 		IFile file = project.getProject().getFile(fileName);
 
-		IPath location = new Path(folder.getLocation().toOSString() + File.separator + fileName);
+		IPath location = new Path(folder.getLocation().toString() + File.separator + fileName);
 
-		File linkFile = new File(location.toOSString());
+		File linkFile = new File(location.toString());
 		if (!linkFile.exists()) {
 			linkFile.createNewFile();
 		}

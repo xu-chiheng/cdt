@@ -192,7 +192,7 @@ public class ExternalExecutablesDialog extends TrayDialog {
 					if (bundle != null && bundle.getState() != Bundle.UNINSTALLED
 							&& bundle.getState() != Bundle.STOPPING) {
 						workspace = org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot().getLocation()
-								.toOSString();
+								.toString();
 					}
 
 					String filterPath = last_filter_path != null ? last_filter_path : workspace;
@@ -268,7 +268,7 @@ public class ExternalExecutablesDialog extends TrayDialog {
 					if (bundle != null && bundle.getState() != Bundle.UNINSTALLED
 							&& bundle.getState() != Bundle.STOPPING) {
 						workspace = org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot().getLocation()
-								.toOSString();
+								.toString();
 					}
 
 					String filterPath = last_filter_icon != null ? last_filter_icon : workspace;

@@ -452,7 +452,7 @@ public class MSVCBuildCommandParserTests {
 
 		// parse line
 		parser.startup(cfgDescription, null);
-		parser.processLine("cl " + "/IC:\\path0 " + "/I. " + '"' + file.getLocation().toOSString() + '"');
+		parser.processLine("cl " + "/IC:\\path0 " + "/I. " + '"' + file.getLocation().toString() + '"');
 		parser.shutdown();
 
 		// check entries
@@ -483,7 +483,7 @@ public class MSVCBuildCommandParserTests {
 		// parse line
 		parser.startup(cfgDescription, null);
 		parser.processLine("cl /IC:\\path0 \"file with spaces 1.cpp\"");
-		parser.processLine("cl /IC:\\path0 \"" + file2.getLocation().toOSString() + "\"");
+		parser.processLine("cl /IC:\\path0 \"" + file2.getLocation().toString() + "\"");
 		parser.shutdown();
 
 		// check populated entries

@@ -531,7 +531,7 @@ public class RefreshScopeTests extends BaseTestCase5 {
 
 	private void createTestFile(IPath path) {
 		path = path.append("foo.cpp");
-		File file = new File(path.toOSString());
+		File file = new File(path.toString());
 		try {
 			file.createNewFile();
 		} catch (IOException e) {

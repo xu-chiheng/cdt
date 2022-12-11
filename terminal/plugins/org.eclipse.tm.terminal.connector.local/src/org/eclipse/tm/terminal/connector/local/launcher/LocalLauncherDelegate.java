@@ -132,7 +132,7 @@ public class LocalLauncherDelegate extends AbstractLauncherDelegate {
 							&& org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot()
 									.getLocation() != null) {
 						cwd = org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot().getLocation()
-								.toOSString();
+								.toString();
 					}
 				}
 			} else {
@@ -143,7 +143,7 @@ public class LocalLauncherDelegate extends AbstractLauncherDelegate {
 
 					IPath p = new Path(resolved);
 					if (p.toFile().canRead() && p.toFile().isDirectory()) {
-						cwd = p.toOSString();
+						cwd = p.toString();
 					}
 				} catch (CoreException ex) {
 					if (Platform.inDebugMode()) {
@@ -378,7 +378,7 @@ public class LocalLauncherDelegate extends AbstractLauncherDelegate {
 					&& org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot() != null
 					&& org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot().getLocation() != null) {
 				envpList.add("ECLIPSE_WORKSPACE=" + org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot() //$NON-NLS-1$
-						.getLocation().toOSString());
+						.getLocation().toString());
 			}
 		}
 

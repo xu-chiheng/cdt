@@ -858,7 +858,7 @@ public abstract class IndexBindingResolutionTestBase extends SemanticTestBase {
 
 			referenced = createReferencedContent();
 
-			TestScannerProvider.sIncludes = new String[] { referenced.getProject().getLocation().toOSString() };
+			TestScannerProvider.sIncludes = new String[] { referenced.getProject().getLocation().toString() };
 			IFile references = TestSourceReader.createFile(cproject.getProject(),
 					new Path("refs.c" + (cpp ? "pp" : "")), sourceContents);
 

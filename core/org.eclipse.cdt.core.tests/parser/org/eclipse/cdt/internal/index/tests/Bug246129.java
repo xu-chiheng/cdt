@@ -122,14 +122,14 @@ public class Bug246129 extends IndexTestBase {
 
 			// However, the scanner info provider used by the unit tests
 			// needs separate setup, and this one must be complete.
-			TestScannerProvider.sIncludes = new String[] { fWrapperIncludeFolder.getLocation().toOSString(),
-					fIncludeFolder.getLocation().toOSString(), fExternalWrapperIncludeFolder.getAbsolutePath(),
+			TestScannerProvider.sIncludes = new String[] { fWrapperIncludeFolder.getLocation().toString(),
+					fIncludeFolder.getLocation().toString(), fExternalWrapperIncludeFolder.getAbsolutePath(),
 					fExternalIncludeFolder.getAbsolutePath() };
 
 			IndexerPreferences.set(fProject.getProject(), IndexerPreferences.KEY_INDEX_UNUSED_HEADERS_WITH_DEFAULT_LANG,
 					"false");
 
-			File falseFriendDirectory = new File(fWrapperIncludeFolder.getLocation().toOSString() + "/ext/..");
+			File falseFriendDirectory = new File(fWrapperIncludeFolder.getLocation().toString() + "/ext/..");
 
 			fFalseFriendsAccepted = falseFriendDirectory.exists();
 

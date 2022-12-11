@@ -44,7 +44,7 @@ public abstract class StandaloneTest {
 		SWTBotShell executableShell = bot.shell(DEBUG_NEW_EXECUTABLE_TITLE);
 		executableShell.setFocus();
 
-		executableShell.bot().textWithLabel("Binary: ").typeText(executablePath.toOSString());
+		executableShell.bot().textWithLabel("Binary: ").typeText(executablePath.toString());
 		executableShell.bot().button("OK").click();
 
 		bot.waitUntil(Conditions.shellIsActive(C_C_STAND_ALONE_DEBUGGER_TITLE));

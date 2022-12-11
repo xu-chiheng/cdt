@@ -112,7 +112,7 @@ public abstract class BaseSelectionTestsIndexer extends BaseSelectionTests {
 
 		IPath location = ResourceHelper.createTemporaryFolder().append(fileName);
 
-		File linkFile = new File(location.toOSString());
+		File linkFile = new File(location.toString());
 		if (linkFile.exists()) {
 			linkFile.delete();
 		}
@@ -140,7 +140,7 @@ public abstract class BaseSelectionTestsIndexer extends BaseSelectionTests {
 		IProject project = fCProject.getProject();
 		IFolder linkedFolder = project.getFolder(folderName);
 		IPath folderLocation = new Path(
-				project.getLocation().toOSString() + File.separator + folderName + "_this_is_linked"); //$NON-NLS-1$
+				project.getLocation().toString() + File.separator + folderName + "_this_is_linked"); //$NON-NLS-1$
 		IFolder actualFolder = project.getFolder(folderName + "_this_is_linked"); //$NON-NLS-1$
 		if (!actualFolder.exists())
 			actualFolder.create(true, true, monitor);

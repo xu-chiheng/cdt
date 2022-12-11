@@ -317,14 +317,14 @@ public class ResourceHelper {
 	public static IPath createWorkspaceFile(String name) throws CoreException, IOException {
 		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		IPath fullPath = workspaceRoot.getLocation().append(name);
-		java.io.File file = new java.io.File(fullPath.toOSString());
+		java.io.File file = new java.io.File(fullPath.toString());
 		if (!file.exists()) {
 			boolean result = file.createNewFile();
 			Assert.assertTrue(result);
 		}
 		Assert.assertTrue(file.exists());
 
-		externalFilesCreated.add(fullPath.toOSString());
+		externalFilesCreated.add(fullPath.toString());
 		workspaceRoot.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
 		return fullPath;
 	}
@@ -364,14 +364,14 @@ public class ResourceHelper {
 	public static IPath createWorkspaceFolder(String name) throws CoreException, IOException {
 		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		IPath fullPath = workspaceRoot.getLocation().append(name);
-		java.io.File folder = new java.io.File(fullPath.toOSString());
+		java.io.File folder = new java.io.File(fullPath.toString());
 		if (!folder.exists()) {
 			boolean result = folder.mkdirs();
 			Assert.assertTrue(result);
 		}
 		Assert.assertTrue(folder.exists());
 
-		externalFilesCreated.add(fullPath.toOSString());
+		externalFilesCreated.add(fullPath.toString());
 		workspaceRoot.refreshLocal(IResource.DEPTH_INFINITE, NULL_MONITOR);
 		return fullPath;
 	}
@@ -556,8 +556,8 @@ public class ResourceHelper {
 			throw new UnsupportedOperationException("Windows links .lnk are not supported.");
 		}
 
-		Assert.assertTrue("Path for symbolic link does not exist: [" + realPath.toOSString() + "]",
-				new File(realPath.toOSString()).exists());
+		Assert.assertTrue("Path for symbolic link does not exist: [" + realPath.toString() + "]",
+				new File(realPath.toString()).exists());
 
 		IPath linkedPath = project.getLocation().append(linkName);
 		createSymbolicLink(linkedPath, realPath);
@@ -571,7 +571,7 @@ public class ResourceHelper {
 		}
 		Assert.assertTrue("Failed to create resource form symbolic link", resource.exists());
 
-		externalFilesCreated.add(linkedPath.toOSString());
+		externalFilesCreated.add(linkedPath.toString());
 		ResourcesPlugin.getWorkspace().getRoot().refreshLocal(IResource.DEPTH_INFINITE, NULL_MONITOR);
 		return resource;
 	}
@@ -591,7 +591,7 @@ public class ResourceHelper {
 			throw new UnsupportedOperationException("Windows links .lnk are not supported.");
 		}
 
-		String command[] = { "ln", "-s", realPath.toOSString(), linkPath.toOSString() };
+		String command[] = { "ln", "-s", realPath.toString(), linkPath.toString() };
 		Process process = Runtime.getRuntime().exec(command);
 
 		// Wait for up to 2.5s...

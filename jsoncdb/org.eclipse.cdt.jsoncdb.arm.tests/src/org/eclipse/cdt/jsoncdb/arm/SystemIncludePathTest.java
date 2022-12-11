@@ -56,7 +56,7 @@ public class SystemIncludePathTest {
 		assertEquals("#entries", 1, result.getSystemIncludePaths().size());
 		assertEquals("name", name, result.getSystemIncludePaths().get(0));
 
-		name = (new Path("A:an\\In CLU  de/Pat h")).toOSString();
+		name = (new Path("A:an\\In CLU  de/Pat h")).toString();
 		// -J"A:an\In CLU de/Pat h"
 		result = tcp.processArgs(cwd, "-J" + "\"" + name + "\"" + more);
 		assertEquals("#entries", 1, result.getSystemIncludePaths().size());

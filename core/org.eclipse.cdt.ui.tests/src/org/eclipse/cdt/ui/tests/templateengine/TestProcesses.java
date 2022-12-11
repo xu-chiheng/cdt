@@ -32,7 +32,7 @@ import org.eclipse.core.runtime.Platform;
 
 public class TestProcesses extends BaseTestCase {
 	private static final String workspaceLocation = ResourcesPlugin.getWorkspace().getRoot().getRawLocation()
-			.toOSString();
+			.toString();
 	private static final String PROJECT_NAME = "TemplateEngineTestsProject"; //$NON-NLS-1$
 	private static final String SOURCE_FOLDER = "Source"; //$NON-NLS-1$
 	private static final String FILE_NAME = "File"; //$NON-NLS-1$

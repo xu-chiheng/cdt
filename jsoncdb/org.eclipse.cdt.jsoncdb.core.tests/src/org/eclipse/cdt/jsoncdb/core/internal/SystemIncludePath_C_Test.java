@@ -60,7 +60,7 @@ public class SystemIncludePath_C_Test {
 		assertEquals("#entries", 1, result.getSystemIncludePaths().size());
 		assertEquals("name", name, result.getSystemIncludePaths().get(0));
 
-		name = (new Path("A:an\\Include/Path")).toOSString();
+		name = (new Path("A:an\\Include/Path")).toString();
 		// -isystem A:an\Include/Path
 		result = new ParseContext();
 		assertEquals(8 + 1 + name.length(), testee.processArgument(result, cwd, "-isystem " + name + more));
@@ -99,7 +99,7 @@ public class SystemIncludePath_C_Test {
 		assertEquals("#entries", 1, result.getSystemIncludePaths().size());
 		assertEquals("name", name, result.getSystemIncludePaths().get(0));
 
-		name = (new Path("A:an\\In CLU  de/Pat h")).toOSString();
+		name = (new Path("A:an\\In CLU  de/Pat h")).toString();
 		// -isystem"A:an\In CLU de/Pat h"
 		result = new ParseContext();
 		assertEquals(8 + name.length() + 2,
@@ -113,7 +113,7 @@ public class SystemIncludePath_C_Test {
 		assertEquals("#entries", 1, result.getSystemIncludePaths().size());
 		assertEquals("name", name, result.getSystemIncludePaths().get(0));
 
-		name = (new Path("/Inc/CLUde/Path")).toOSString();
+		name = (new Path("/Inc/CLUde/Path")).toString();
 		// -isystem/Inc/CLUde/Path
 		result = new ParseContext();
 		assertEquals(8 + name.length(), testee.processArgument(result, cwd, "-isystem" + name + more));

@@ -140,19 +140,19 @@ public class ShowInDOMViewAction extends ActionDelegate implements IEditorAction
 		}
 		IFile file = ResourceUtil.getFile(input);
 		if (file != null) {
-			return file.getLocation().toOSString();
+			return file.getLocation().toString();
 		}
 		if (input instanceof IPathEditorInput) {
 			IPath location = ((IPathEditorInput) input).getPath();
 			if (location != null) {
-				return location.toOSString();
+				return location.toString();
 			}
 		}
 		ILocationProvider locationProvider = input.getAdapter(ILocationProvider.class);
 		if (locationProvider != null) {
 			IPath location = locationProvider.getPath(input);
 			if (location != null) {
-				return location.toOSString();
+				return location.toString();
 			}
 		}
 		return null;

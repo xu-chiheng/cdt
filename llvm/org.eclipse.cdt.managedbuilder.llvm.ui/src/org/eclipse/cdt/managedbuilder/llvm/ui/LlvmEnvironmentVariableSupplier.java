@@ -324,7 +324,7 @@ public class LlvmEnvironmentVariableSupplier implements IConfigurationEnvironmen
 		// get mingw bin path
 		IPath mingwBinPath = getBinDir();
 		if (mingwBinPath != null) {
-			StringBuilder sB = new StringBuilder(mingwBinPath.toOSString());
+			StringBuilder sB = new StringBuilder(mingwBinPath.toString());
 			// drop bin
 			if (sB.length() >= 3) {
 				sB.delete(sB.length() - 3, sB.length());
