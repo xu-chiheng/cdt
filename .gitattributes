@@ -28,6 +28,8 @@ LICENSE text
 *.am text
 # file permission +x
 *.bat text
+# file permission +x
+*.cmd text
 *.build text
 *.incl text
 makefile text
