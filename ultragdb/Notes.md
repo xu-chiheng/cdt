@@ -1,5 +1,51 @@
 
 
+
+# Planned changes
+
+
+替换
+```
+Runtime.getRuntime().exec(args);
+ProcessFactory.getFactory().exec(args);
+```
+
+# Use of UltraGDB.isOn
+
+通过下面的代码，截获函数的调用。
+```
+if (UltraGDB.isOn) {
+	...
+}
+```
+
+
+# Added files
+
+```
+.github/README.md
+core/org.eclipse.cdt.core.native/src/org/eclipse/cdt/core/UltraGDB.java
+core/org.eclipse.cdt.core.native/src/org/eclipse/cdt/utils/pty/PTY2.java
+core/org.eclipse.cdt.core.native/src/org/eclipse/cdt/utils/pty/PTY2Util.java
+core/org.eclipse.cdt.core/utils/org/eclipse/cdt/internal/core/Cygwin1.java
+core/org.eclipse.cdt.core/utils/org/eclipse/cdt/internal/core/MSYS2.java
+remove-unneeded-plugins.cmd
+remove-unneeded-plugins.sh
+remove-unneeded-plugins.sh.sh
+ultragdb/BUILD.md
+ultragdb/ChangeLog.md
+ultragdb/Notes.md
+```
+
+# Changed files which is significant
+
+```
+.gitattributes
+.github/workflows/build-test.yml
+.github/workflows/code-cleanliness.yml
+releng/scripts/check_code_cleanliness.sh
+```
+
 # Cygwin and MSYS2/MinGW
 
 
@@ -29,6 +75,40 @@ How to fix an ancient GDB problem
 
 https://lwn.net/Articles/909496/
 
+```
+Mintty works on all Windows versions from Windows XP onwards. Similarly to other Cygwin/MSYS terminals based on pseudo terminal ("pty") devices. 
+Windows console input/output (as used by native Windows command-line programs) has interworking problems with "pty" mode (most notably character set, but also character-wise input and signal processing incompatibilities, see input/output interaction). 
+Cygwin 3.1.0 compensates for this issue via the ConPTY API of Windows 10.
+```
+
+```
+/mingw64/bin/gdb  是如何支持如下选项的？
+--tty=TTY          Use TTY for input/output by the program being debugged.
+```
+
+研究cygwin1.dll中forkpty和openpty的实现。
+
+
+将mintty konsole Eclipse CDT的修改合并到上流。
+
+将存档的Cygwin和MSYS2上传到github上。
+
+将mintty和konsole的修改upstream到上游。
+
+研究gnome-terminal，研究如何使用openpty。
+
+在KDE和GNOME的bug系统中fire一个bug，描述双击可执行文件需要在一个terminal emulator中运行这个程序。
+
+```
+./mintty/bin/mintty.exe --openpty &
+/dev/pty1
+
+echo hello >/dev/pty1
+
+gdb --tty=/dev/pty1 emacs
+run
+```
+
 # README.md
 
 https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes
@@ -39,3 +119,4 @@ If a repository contains more than one README file, then the file shown is chose
 # Run tests
 
 If you want to run tests, do so as much as you like, enable github actions on your fork and then you can run all the tests you want.
+
