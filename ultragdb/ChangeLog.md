@@ -33,6 +33,22 @@ index 0452f281cc..41791f265d 100755
          -DskipTests=true \
 ```
 
+
+```
+Running 'mvn verify -P baseline-compare-and-replace' to make sure all versions
+have been appropriately incremented. The check output is very verbose, so it is
+redirected to baseline-compare-and-replace.log which is archived as part of the build artifacts.
+The following bundles are missing a service segment version bump:
+  - org.eclipse.cdt.core
+Please bump service segment by 100 if on master branch
+The log of this build is part of the artifacts
+See: https://wiki.eclipse.org/Version_Numbering#When_to_change_the_service_segment
+
+Error: Process completed with exit code 1.
+```
+
+
+
 # Replace all toOSString to toString
 
 To use '/' as file separator on Windows. It should have no side effect on Linux and macOS.

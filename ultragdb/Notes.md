@@ -3,7 +3,9 @@
 # Cygwin and MSYS2/MinGW
 
 
-ToolSet 和 LaunchConfiguration的参数需要传递给ProcessFactory，这样才能知道是Cygwin还是MinGW.
+ToolSet 和 LaunchConfiguration的参数需要传递给ProcessFactory.exec()，这样才能知道是Cygwin还是MinGW.
+也可以通过增加一个环境变量比如TOOLSET，在ProcessFactory.Builder.start()中，判断，并且相应的修正PATH。
+
 
 Import C/C++ executable时，需要能够确定是否是Cygwin还是MinGW，可以通过 BinaryParser分析文件来确定。
 
@@ -32,3 +34,8 @@ https://lwn.net/Articles/909496/
 https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes
 
 If a repository contains more than one README file, then the file shown is chosen from locations in the following order: the .github directory, then the repository's root directory, and finally the docs directory.
+
+
+# Run tests
+
+If you want to run tests, do so as much as you like, enable github actions on your fork and then you can run all the tests you want.

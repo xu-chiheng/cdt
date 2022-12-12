@@ -24,6 +24,7 @@ import java.util.Map.Entry;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
+import org.eclipse.cdt.core.UltraGDB;
 import org.eclipse.cdt.internal.core.natives.CNativePlugin;
 import org.eclipse.cdt.internal.core.natives.Messages;
 import org.eclipse.cdt.utils.pty.PTY;
@@ -257,6 +258,9 @@ public class ProcessFactory {
 		public Process start() throws IOException {
 			// Uncomment the next line, set a breakpoint in the last line of debug() method,
 			// when the breakpoint is triggered, inspect the sb variable to see detailed info on what is being launched.
+			if (UltraGDB.isOn) {
+				debug();
+			}
 			// debug();
 			Process p;
 			if (hasSpawner) {
