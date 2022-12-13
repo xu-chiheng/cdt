@@ -20,32 +20,6 @@ if (UltraGDB.isOn) {
 ```
 
 
-# Added files
-
-```
-.github/README.md
-core/org.eclipse.cdt.core.native/src/org/eclipse/cdt/core/UltraGDB.java
-core/org.eclipse.cdt.core.native/src/org/eclipse/cdt/utils/pty/PTY2.java
-core/org.eclipse.cdt.core.native/src/org/eclipse/cdt/utils/pty/PTY2Util.java
-core/org.eclipse.cdt.core/utils/org/eclipse/cdt/internal/core/Cygwin1.java
-core/org.eclipse.cdt.core/utils/org/eclipse/cdt/internal/core/MSYS2.java
-remove-unneeded-plugins.cmd
-remove-unneeded-plugins.sh
-remove-unneeded-plugins.sh.sh
-ultragdb/BUILD.md
-ultragdb/ChangeLog.md
-ultragdb/Notes.md
-```
-
-# Changed files which is significant
-
-```
-.gitattributes
-.github/workflows/build-test.yml
-.github/workflows/code-cleanliness.yml
-releng/scripts/check_code_cleanliness.sh
-```
-
 # Cygwin and MSYS2/MinGW
 
 

@@ -1,5 +1,5 @@
 
-# Do not run "baseline-compare-and-replace"
+# Disable "baseline-compare-and-replace"
 
 because we add some java files, introducing new APIs.
 
@@ -49,7 +49,7 @@ Error: Process completed with exit code 1.
 
 
 
-# Replace all toOSString to toString
+# Replace toOSString to toString
 
 To use '/' as file separator on Windows. It should have no side effect on Linux and macOS.
 
