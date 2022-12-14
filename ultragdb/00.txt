@@ -1,0 +1,13 @@
+.gitattributes
+.github/README.md
+.github/workflows/build-test.yml
+.github/workflows/code-cleanliness.yml
+releng/scripts/check_code_cleanliness.sh
+remove-unneeded-plugins.cmd
+remove-unneeded-plugins.sh
+remove-unneeded-plugins.sh.sh
+ultragdb/BUILD.md
+ultragdb/ChangeLog.md
+ultragdb/Notes.md
+ultragdb/generate-patches.cmd
+ultragdb/generate-patches.sh.sh

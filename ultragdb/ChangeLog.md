@@ -1,4 +1,41 @@
 
+# Run Github Actions on push of branch "work" and "test*"
+
+```
+diff --git a/.github/workflows/build-test.yml b/.github/workflows/build-test.yml
+index 7353824f9d..527e632e04 100644
+--- a/.github/workflows/build-test.yml
++++ b/.github/workflows/build-test.yml
+@@ -2,9 +2,9 @@ name: Build and Test
+ 
+ on:
+   push:
+-    branches: [ "main", "cdt_11_0" ]
++    branches: [ "work", "test*" ]
+   pull_request:
+-    branches: [ "main", "cdt_11_0" ]
++    branches: [ "work" ]
+ 
+```
+
+```
+diff --git a/.github/workflows/code-cleanliness.yml b/.github/workflows/code-cleanliness.yml
+index a7062e6306..a8f66928bf 100644
+--- a/.github/workflows/code-cleanliness.yml
++++ b/.github/workflows/code-cleanliness.yml
+@@ -2,9 +2,9 @@ name: Code Cleanliness Checks
+ 
+ on:
+   push:
+-    branches: [ "main", "cdt_11_0" ]
++    branches: [ "work", "test*" ]
+   pull_request:
+-    branches: [ "main", "cdt_11_0" ]
++    branches: [ "work" ]
+ 
+```
+
+
 # Disable "baseline-compare-and-replace"
 
 because we add some java files, introducing new APIs.

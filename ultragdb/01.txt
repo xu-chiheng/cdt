@@ -1,0 +1,5 @@
+core/org.eclipse.cdt.core.native/src/org/eclipse/cdt/core/UltraGDB.java
+core/org.eclipse.cdt.core.native/src/org/eclipse/cdt/utils/pty/PTY2.java
+core/org.eclipse.cdt.core.native/src/org/eclipse/cdt/utils/pty/PTY2Util.java
+core/org.eclipse.cdt.core/utils/org/eclipse/cdt/internal/core/Cygwin1.java
+core/org.eclipse.cdt.core/utils/org/eclipse/cdt/internal/core/MSYS2.java

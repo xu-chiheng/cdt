@@ -9,36 +9,40 @@
 #  ********************************************************************************/
 
 
+
 cd ..
 
+PATCH_DIR="$(cd ..; pwd)/cdt-patch"
+FILE_LIST_DIR="$(pwd)/ultragdb"
 
+# https://git-scm.com/docs/git-diff
+# --diff-filter=[(A|C|D|M|R|T|U|X|B)…​[*]]
+# Select only files that are Added (A), Copied (C), Deleted (D), Modified (M), Renamed (R), have their type (i.e. regular file, symlink, submodule, …​) changed (T), are Unmerged (U), are Unknown (X), or have had their pairing Broken (B). Any combination of the filter characters (including none) can be used. When * (All-or-none) is added to the combination, all paths are selected if there is any file that matches other criteria in the comparison; if there is no file that matches other criteria, nothing is selected.
 
-PATCH_DIR="../cdt-patch"
+# show all changed files
+# git diff --name-only main...work
 
-
-CHANGED_FILES_OR_DIRS=(
-    .github
-    ultragdb
-    releng
-    .gitattributes
+PATCH_00_FILES_OR_DIRS=(
+    # show all changed non-java files
+    $(git diff --name-only main...work | grep -v '\.java$' | tee "${FILE_LIST_DIR}/00.txt")
 )
 
-ADDED_FILES_OR_DIRS=(
-    core/org.eclipse.cdt.core.native/src/org/eclipse/cdt/core/UltraGDB.java
-    core/org.eclipse.cdt.core.native/src/org/eclipse/cdt/utils/pty/PTY2.java
-    core/org.eclipse.cdt.core.native/src/org/eclipse/cdt/utils/pty/PTY2Util.java
-    core/org.eclipse.cdt.core/utils/org/eclipse/cdt/internal/core/Cygwin1.java
-    core/org.eclipse.cdt.core/utils/org/eclipse/cdt/internal/core/MSYS2.java
-    remove-unneeded-plugins.cmd
-    remove-unneeded-plugins.sh
-    remove-unneeded-plugins.sh.sh
+PATCH_01_FILES_OR_DIRS=(
+    # show only added java files
+    $(git diff --diff-filter=A --name-only main...work | grep '\.java$' | tee "${FILE_LIST_DIR}/01.txt")
+)
+
+PATCH_02_FILES_OR_DIRS=(
+    # show only modified java files
+    $(git diff --diff-filter=M --name-only main...work | grep '\.java$' | tee "${FILE_LIST_DIR}/02.txt")
 )
 
 
-rm -rf "${PATCH_DIR}" \
-&& mkdir -p "${PATCH_DIR}" \
-&& git diff main...work -- "${CHANGED_FILES_OR_DIRS[@]}" > "${PATCH_DIR}/00.patch" \
-&& git diff main...work -- "${ADDED_FILES_OR_DIRS[@]}" > "${PATCH_DIR}/01.patch" \
+rm -rf "${PATCH_DIR}"
+mkdir -p "${PATCH_DIR}"
+git diff main...work -- "${PATCH_00_FILES_OR_DIRS[@]}" > "${PATCH_DIR}/00.patch"
+git diff main...work -- "${PATCH_01_FILES_OR_DIRS[@]}" > "${PATCH_DIR}/01.patch"
+git diff main...work -- "${PATCH_02_FILES_OR_DIRS[@]}" > "${PATCH_DIR}/02.patch"
 
 
 

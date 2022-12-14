@@ -1,18 +1,22 @@
 
-
 ```
-releng/org.eclipse.cdt.target/cdt.target
-		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-			<repository location="https://download.eclipse.org/tools/orbit/downloads/drops/S20221118032057/repository/"/>
+Double click "remove-unneeded-plugins.cmd" to remove unneeded plugins.
 
-		</location>
-
-Eclipse Committers     Help -> Install New Software...   输入上面的repository location
-```
-
-```
 Eclipse Committers
-Import -> Git -> Projects from Git  选择目录“E:\Source\IDE\cdt”
-Windows -> Perspective -> Open Perspective -> Other... -> Plug-in Development
+Import -> Git -> Projects from Git, select the source directory, like “E:\Source\IDE\cdt”.
+
+Run "git reset --hard HEAD" to restore deleted files
+
+Eclipse Committers
+In Java Perspective, double click "org.eclipse.cdt.target/cdt.target"
+Or in Plug-in Development Perspective, double click 
+"org.eclipse.cdt.root/releng/org.eclipse.cdt.target/cdt.target"
+
+Target Definition -> Set As Active Target Platform
+Right down corner : Resolving "cdt" target definition ... 
+Double click it to show progress.
+Wait it to complete.
+
 org.eclipse.cdt.ui  Run/Debug as Eclipse Application
+
 ```
