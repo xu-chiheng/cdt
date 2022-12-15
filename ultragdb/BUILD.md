@@ -31,35 +31,297 @@ mvn package -DskipDoc=true -DskipTests=true
 # releng/org.eclipse.cdt.repo/target/org.eclipse.cdt.repo.zip
 # output directory :
 # releng/org.eclipse.cdt.repo/target/repository
-```
 
-```bash
+
+
+builder_eclipse() {
+    local output_file="releng/org.eclipse.cdt.repo/target/org.eclipse.cdt.repo.zip"
+    if [ -d .git ] && [ -f "${output_file}" ]; then
+        d:/builder/eclipsec.exe \
+            -application org.eclipse.equinox.p2.director \
+            -repository "jar:file:$(cygpath -m "$(pwd)")/${output_file}!" \
+            "$@"
+    else
+        false
+    fi
+}
+
 # Running inside the target application
 # d:/builder/ must first contain an eclipse product
-d:/builder/eclipsec.exe \
-    -application org.eclipse.equinox.p2.director \
-    -repository "jar:file:$(cygpath -m "$(pwd)")/releng/org.eclipse.cdt.repo/target/org.eclipse.cdt.repo.zip!" \
-    -installIU org.eclipse.cdt.feature.group
+builder_eclipse -installIU org.eclipse.cdt.feature.group
 
-```
-```bash
+# https://stackoverflow.com/questions/1527049/how-can-i-join-elements-of-an-array-in-bash
+function join_by {
+  local d=${1-} f=${2-}
+  if shift 2; then
+    printf %s "$f" "${@/#/$d}"
+  fi
+}
+
+# builder_eclipse -list
+FEATURE_GROUPS=(
+    $(builder_eclipse -list 2>/dev/null | cut -d '=' -f 1 | grep '.feature.group')
+)
+PLUG_INS=(
+    $(builder_eclipse -list 2>/dev/null | cut -d '=' -f 1 | grep -v '.feature.group'  | grep -v '.feature' | grep -v '.source')
+)
+
+FEATURE_GROUPS=(
+    org.eclipse.cdt.autotools.feature.group
+    org.eclipse.cdt.autotools.source.feature.group
+    org.eclipse.cdt.build.crossgcc.feature.group
+    org.eclipse.cdt.build.crossgcc.source.feature.group
+    org.eclipse.cdt.cmake.feature.group
+    org.eclipse.cdt.cmake.source.feature.group
+    org.eclipse.cdt.core.autotools.feature.group
+    org.eclipse.cdt.core.autotools.source.feature.group
+    org.eclipse.cdt.debug.gdbjtag.feature.group
+    org.eclipse.cdt.debug.gdbjtag.source.feature.group
+    org.eclipse.cdt.debug.standalone.feature.group
+    org.eclipse.cdt.debug.standalone.source.feature.group
+    org.eclipse.cdt.debug.ui.memory.feature.group
+    org.eclipse.cdt.debug.ui.memory.source.feature.group
+    org.eclipse.cdt.docker.launcher.feature.group
+    org.eclipse.cdt.docker.launcher.source.feature.group
+    org.eclipse.cdt.examples.dsf.feature.group
+    org.eclipse.cdt.examples.dsf.source.feature.group
+    org.eclipse.cdt.feature.group
+    org.eclipse.cdt.gdb.feature.group
+    org.eclipse.cdt.gdb.source.feature.group
+    org.eclipse.cdt.gnu.build.feature.group
+    org.eclipse.cdt.gnu.build.source.feature.group
+    org.eclipse.cdt.gnu.debug.feature.group
+    org.eclipse.cdt.gnu.debug.source.feature.group
+    org.eclipse.cdt.gnu.dsf.feature.group
+    org.eclipse.cdt.gnu.dsf.source.feature.group
+    org.eclipse.cdt.gnu.multicorevisualizer.feature.group
+    org.eclipse.cdt.gnu.multicorevisualizer.source.feature.group
+    org.eclipse.cdt.launch.remote.feature.group
+    org.eclipse.cdt.launch.remote.source.feature.group
+    org.eclipse.cdt.launch.serial.feature.feature.group
+    org.eclipse.cdt.launch.serial.feature.source.feature.group
+    org.eclipse.cdt.llvm.dsf.lldb.feature.group
+    org.eclipse.cdt.llvm.dsf.lldb.source.feature.group
+    org.eclipse.cdt.managedbuilder.llvm.feature.group
+    org.eclipse.cdt.managedbuilder.llvm.source.feature.group
+    org.eclipse.cdt.meson.feature.group
+    org.eclipse.cdt.meson.source.feature.group
+    org.eclipse.cdt.msw.feature.group
+    org.eclipse.cdt.msw.source.feature.group
+    org.eclipse.cdt.native.feature.group
+    org.eclipse.cdt.native.source.feature.group
+    org.eclipse.cdt.platform.feature.group
+    org.eclipse.cdt.platform.source.feature.group
+    org.eclipse.cdt.sdk.feature.group
+    org.eclipse.cdt.source.feature.group
+    org.eclipse.cdt.testsrunner.feature.feature.group
+    org.eclipse.cdt.testsrunner.feature.source.feature.group
+    org.eclipse.cdt.unittest.feature.feature.group
+    org.eclipse.cdt.unittest.feature.source.feature.group
+    org.eclipse.cdt.visualizer.feature.group
+    org.eclipse.cdt.visualizer.source.feature.group
+    org.eclipse.launchbar.feature.group
+    org.eclipse.launchbar.remote.feature.group
+    org.eclipse.launchbar.remote.source.feature.group
+    org.eclipse.launchbar.source.feature.group
+    org.eclipse.remote.console.feature.group
+    org.eclipse.remote.console.source.feature.group
+    org.eclipse.remote.feature.group
+    org.eclipse.remote.proxy.feature.group
+    org.eclipse.remote.proxy.source.feature.group
+    org.eclipse.remote.serial.feature.group
+    org.eclipse.remote.serial.source.feature.group
+    org.eclipse.remote.source.feature.group
+    org.eclipse.remote.telnet.feature.group
+    org.eclipse.remote.telnet.source.feature.group
+    org.eclipse.tm.terminal.connector.cdtserial.feature.feature.group
+    org.eclipse.tm.terminal.connector.cdtserial.feature.source.feature.group
+    org.eclipse.tm.terminal.connector.local.feature.feature.group
+    org.eclipse.tm.terminal.connector.local.feature.source.feature.group
+    org.eclipse.tm.terminal.connector.remote.feature.feature.group
+    org.eclipse.tm.terminal.connector.remote.feature.source.feature.group
+    org.eclipse.tm.terminal.connector.ssh.feature.feature.group
+    org.eclipse.tm.terminal.connector.ssh.feature.source.feature.group
+    org.eclipse.tm.terminal.connector.telnet.feature.feature.group
+    org.eclipse.tm.terminal.connector.telnet.feature.source.feature.group
+    org.eclipse.tm.terminal.control.feature.feature.group
+    org.eclipse.tm.terminal.control.feature.source.feature.group
+    org.eclipse.tm.terminal.feature.feature.group
+    org.eclipse.tm.terminal.feature.source.feature.group
+    org.eclipse.tm.terminal.view.feature.feature.group
+    org.eclipse.tm.terminal.view.feature.source.feature.group
+)
+
+PLUG_INS=(
+    202212150823.Default
+    202212150823.extra
+    202212150823.extra-jsoncdb
+    202212150823.launchbar
+    202212150823.main
+    202212150823.remote
+    202212150823.remote_sdk
+    202212150823.terminal_main
+    202212150823.terminal_sdk
+    a.jre.javase
+    a.jre.javase
+    a.jre.javase
+    com.google.gson
+    com.sun.jna
+    com.sun.jna.platform
+    com.sun.xml.bind
+    jakarta.xml.bind
+    javax.activation
+    javax.xml
+    javax.xml.stream
+    org.apache.commons.io
+    org.eclipse.cdt
+    org.eclipse.cdt.autotools.core
+    org.eclipse.cdt.autotools.docs
+    org.eclipse.cdt.autotools.ui
+    org.eclipse.cdt.build.crossgcc
+    org.eclipse.cdt.build.gcc.core
+    org.eclipse.cdt.build.gcc.ui
+    org.eclipse.cdt.cmake.core
+    org.eclipse.cdt.cmake.ui
+    org.eclipse.cdt.codan.checkers
+    org.eclipse.cdt.codan.checkers.ui
+    org.eclipse.cdt.codan.core
+    org.eclipse.cdt.codan.core.cxx
+    org.eclipse.cdt.codan.ui
+    org.eclipse.cdt.codan.ui.cxx
+    org.eclipse.cdt.core
+    org.eclipse.cdt.core.autotools.core
+    org.eclipse.cdt.core.autotools.ui
+    org.eclipse.cdt.core.linux
+    org.eclipse.cdt.core.linux.aarch64
+    org.eclipse.cdt.core.linux.ppc64le
+    org.eclipse.cdt.core.linux.x86_64
+    org.eclipse.cdt.core.macosx
+    org.eclipse.cdt.core.native
+    org.eclipse.cdt.core.win32
+    org.eclipse.cdt.core.win32.x86_64
+    org.eclipse.cdt.debug.application
+    org.eclipse.cdt.debug.application.doc
+    org.eclipse.cdt.debug.core
+    org.eclipse.cdt.debug.core.memory
+    org.eclipse.cdt.debug.gdbjtag
+    org.eclipse.cdt.debug.gdbjtag.core
+    org.eclipse.cdt.debug.gdbjtag.ui
+    org.eclipse.cdt.debug.ui
+    org.eclipse.cdt.debug.ui.memory.floatingpoint
+    org.eclipse.cdt.debug.ui.memory.memorybrowser
+    org.eclipse.cdt.debug.ui.memory.search
+    org.eclipse.cdt.debug.ui.memory.traditional
+    org.eclipse.cdt.debug.ui.memory.transport
+    org.eclipse.cdt.doc.isv
+    org.eclipse.cdt.doc.user
+    org.eclipse.cdt.docker.launcher
+    org.eclipse.cdt.dsf
+    org.eclipse.cdt.dsf.gdb
+    org.eclipse.cdt.dsf.gdb.multicorevisualizer.ui
+    org.eclipse.cdt.dsf.gdb.ui
+    org.eclipse.cdt.dsf.ui
+    org.eclipse.cdt.examples.dsf
+    org.eclipse.cdt.examples.dsf.pda
+    org.eclipse.cdt.examples.dsf.pda.ui
+    org.eclipse.cdt.flatpak.launcher
+    org.eclipse.cdt.gdb
+    org.eclipse.cdt.gdb.ui
+    org.eclipse.cdt.jsoncdb.arm
+    org.eclipse.cdt.jsoncdb.core
+    org.eclipse.cdt.jsoncdb.core.doc
+    org.eclipse.cdt.jsoncdb.core.ui
+    org.eclipse.cdt.jsoncdb.hpenonstop
+    org.eclipse.cdt.jsoncdb.intel
+    org.eclipse.cdt.jsoncdb.microsoft
+    org.eclipse.cdt.jsoncdb.nvidia
+    org.eclipse.cdt.launch
+    org.eclipse.cdt.launch.remote
+    org.eclipse.cdt.launch.serial.core
+    org.eclipse.cdt.launch.serial.ui
+    org.eclipse.cdt.llvm.dsf.lldb.core
+    org.eclipse.cdt.llvm.dsf.lldb.ui
+    org.eclipse.cdt.make.core
+    org.eclipse.cdt.make.ui
+    org.eclipse.cdt.managedbuilder.core
+    org.eclipse.cdt.managedbuilder.gnu.ui
+    org.eclipse.cdt.managedbuilder.headlessbuilderapp
+    org.eclipse.cdt.managedbuilder.llvm.ui
+    org.eclipse.cdt.managedbuilder.ui
+    org.eclipse.cdt.meson.core
+    org.eclipse.cdt.meson.docs
+    org.eclipse.cdt.meson.ui
+    org.eclipse.cdt.meson.ui.editor
+    org.eclipse.cdt.msw.build
+    org.eclipse.cdt.native.serial
+    org.eclipse.cdt.platform.branding
+    org.eclipse.cdt.remote.core
+    org.eclipse.cdt.sdk
+    org.eclipse.cdt.testsrunner
+    org.eclipse.cdt.testsrunner.boost
+    org.eclipse.cdt.testsrunner.gtest
+    org.eclipse.cdt.testsrunner.qttest
+    org.eclipse.cdt.testsrunner.tap
+    org.eclipse.cdt.ui
+    org.eclipse.cdt.unittest
+    org.eclipse.cdt.util
+    org.eclipse.cdt.visualizer.core
+    org.eclipse.cdt.visualizer.ui
+    org.eclipse.cdt_root
+    org.eclipse.launchbar.core
+    org.eclipse.launchbar.remote.core
+    org.eclipse.launchbar.remote.ui
+    org.eclipse.launchbar.ui
+    org.eclipse.launchbar.ui.controls
+    org.eclipse.remote.console
+    org.eclipse.remote.core
+    org.eclipse.remote.doc.isv
+    org.eclipse.remote.jsch.core
+    org.eclipse.remote.jsch.ui
+    org.eclipse.remote.proxy.core
+    org.eclipse.remote.proxy.protocol.core
+    org.eclipse.remote.proxy.server.core
+    org.eclipse.remote.proxy.server.linux.ppc64le
+    org.eclipse.remote.proxy.server.linux.x86_64
+    org.eclipse.remote.proxy.server.macosx.x86_64
+    org.eclipse.remote.proxy.ui
+    org.eclipse.remote.serial.core
+    org.eclipse.remote.serial.ui
+    org.eclipse.remote.telnet.core
+    org.eclipse.remote.telnet.ui
+    org.eclipse.remote.ui
+    org.eclipse.tm.terminal.connector.cdtserial
+    org.eclipse.tm.terminal.connector.local
+    org.eclipse.tm.terminal.connector.process
+    org.eclipse.tm.terminal.connector.remote
+    org.eclipse.tm.terminal.connector.ssh
+    org.eclipse.tm.terminal.connector.telnet
+    org.eclipse.tm.terminal.control
+    org.eclipse.tm.terminal.view.core
+    org.eclipse.tm.terminal.view.ui
+    org.eclipse.tools.templates.core
+    org.eclipse.tools.templates.freemarker
+    org.eclipse.tools.templates.ui
+    org.freemarker
+    org.yaml.snakeyaml
+)
+
+
+builder_eclipse -installIU  "$(join_by , "${FEATURE_GROUPS[@]}")"
+
+
+
+
 # Installing / uninstalling IUs into a target product
 # d:/ultragdb/ must first contain an eclipse product
-d:/builder/eclipsec.exe \
-    -application org.eclipse.equinox.p2.director \
-    -repository "jar:file:$(cygpath -m "$(pwd)")/releng/org.eclipse.cdt.repo/target/org.eclipse.cdt.repo.zip!" \
-    -installIU org.eclipse.cdt.feature.group \
+builder_eclipse -installIU org.eclipse.cdt.feature.group \
     -tag AddCDT \
     -destination d:/ultragdb/ \
     -profile SDKProfile
-```
-```bash
+
 # Installing a complete product
 # d:/ultragdb/ must first contain an eclipse product
-d:/builder/eclipsec.exe \
-    -application org.eclipse.equinox.p2.director \
-    -repository "jar:file:$(cygpath -m "$(pwd)")/releng/org.eclipse.cdt.repo/target/org.eclipse.cdt.repo.zip!" \
-    -installIU org.eclipse.cdt.feature.group \
+builder_eclipse -installIU org.eclipse.cdt.feature.group \
     -tag InitialState \
     -destination d:/ultragdb/ \
     -profile SDKProfile \
