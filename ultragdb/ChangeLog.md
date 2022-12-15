@@ -1,7 +1,7 @@
 
 # Run Github Actions on push of branch "work" and "test*"
 
-```
+```diff
 diff --git a/.github/workflows/build-test.yml b/.github/workflows/build-test.yml
 index 7353824f9d..527e632e04 100644
 --- a/.github/workflows/build-test.yml
@@ -18,7 +18,7 @@ index 7353824f9d..527e632e04 100644
  
 ```
 
-```
+```diff
 diff --git a/.github/workflows/code-cleanliness.yml b/.github/workflows/code-cleanliness.yml
 index a7062e6306..a8f66928bf 100644
 --- a/.github/workflows/code-cleanliness.yml
@@ -54,7 +54,7 @@ index e927f56647..527e632e04 100644
            -Ddsf.gdb.tests.timeout.multiplier=50 \
 ```
 
-```
+```diff
 diff --git a/releng/scripts/check_code_cleanliness.sh b/releng/scripts/check_code_cleanliness.sh
 index 0452f281cc..41791f265d 100755
 --- a/releng/scripts/check_code_cleanliness.sh
