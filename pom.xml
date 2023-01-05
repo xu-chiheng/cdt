@@ -424,6 +424,12 @@
 				<module>debug/org.eclipse.cdt.debug.application.product</module>
 			</modules>
 		</profile>
+		<profile>
+			<id>build-ultragdb</id>
+			<modules>
+				<module>debug/com.verykit.ultragdb.product</module>
+			</modules>
+		</profile>
 		<!-- Automatic profile for features that shouldn't generate sources -->
 		<profile>
 			<id>feature-no-source</id>

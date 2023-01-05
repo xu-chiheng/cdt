@@ -1,9 +1,9 @@
 
 # UltraGDB
 
-## Building
+## Build
 
-Please see [BUILD.md](../ultragdb/BUILD.md) for building information, including setting up a development environment.
+Please see [Build.md](../ultragdb/Build.md) for building information, including setting up a development environment.
 
 ## ChangeLog
 
