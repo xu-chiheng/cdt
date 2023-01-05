@@ -3,12 +3,27 @@
 
 # Planned changes
 
+## Replace
 
-替换
 ```
 Runtime.getRuntime().exec(args);
 ProcessFactory.getFactory().exec(args);
 ```
+
+## Duplicate stand-alone debugger as ultragdb
+
+Duplicate stand-alone debugger project files to ultragdb, so can build ultragdb from command line.
+
+```
+pom.xml
+		<profile>
+			<id>build-standalone-debugger-rcp</id>
+			<modules>
+				<module>debug/org.eclipse.cdt.debug.application.product</module>
+			</modules>
+		</profile>
+```
+
 
 # Use of UltraGDB.isOn
 

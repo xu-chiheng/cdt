@@ -12,7 +12,7 @@
 #!/bin/sh
 
 
-plugins=(
+cdt-plugins=(
     # how to get this list ?
     # Eclipse CDT -> Help -> About Eclipse IDE -> Installation Details -> Plug-ins
     # Click "Plug-in id" to sort by "Plug-in id" 
@@ -113,15 +113,19 @@ plugins=(
 
 )
 
+ultragdb-plugins=("${cdt-plugins[@]}")
+
+
+
 case $(uname -o) in
     Cygwin )
-        plugins+=(
+        platform-plugins=(
             org.eclipse.cdt.core.win32
             org.eclipse.cdt.core.win32.x86_64
         )
         ;;
     Linux )
-        plugins+=(
+        platform-plugins=(
             org.eclipse.cdt.core.linux
             org.eclipse.cdt.core.linux.x86_64
         )
@@ -133,13 +137,16 @@ case $(uname -o) in
 
 esac
 
+cdt-plugins+=("${platform-plugins[@]}")
+ultragdb-plugins+=("${platform-plugins[@]}")
+
 
 for plugin_dir in $(find . -mindepth 2 -maxdepth 2 -type d ! -wholename '*/.git/*' -a ! -wholename '*/~git-tools~/*')
 do
     # echo $plugin_dir
     # https://stackoverflow.com/questions/3685970/check-if-a-bash-array-contains-a-value
     # https://www.folkstalk.com/2022/09/check-if-a-bash-array-contains-a-value-with-code-examples.html
-    if [[ ! " ${plugins[*]} " =~ " $(basename "${plugin_dir}") " ]]; then
+    if [[ ! " ${cdt-plugins[*]} " =~ " $(basename "${plugin_dir}") " ]]; then
         echo $plugin_dir
         rm -rf $plugin_dir
      fi
