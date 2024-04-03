@@ -39,7 +39,6 @@ PATCH_02_FILES_OR_DIRS=(
 )
 
 
-rm -rf "${PATCH_DIR}"
 mkdir -p "${PATCH_DIR}"
 git diff main..."${CURRENT_BRANCH}" -- "${PATCH_00_FILES_OR_DIRS[@]}" > "${PATCH_DIR}/00.patch"
 git diff main..."${CURRENT_BRANCH}" -- "${PATCH_01_FILES_OR_DIRS[@]}" > "${PATCH_DIR}/01.patch"
